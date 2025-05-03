@@ -1,3 +1,5 @@
+[![Verify All (Typecheck, Lint, Test)](https://github.com/able-wong/redact-pii-core/actions/workflows/verify_all.yml/badge.svg)](https://github.com/able-wong/redact-pii-core/actions/workflows/verify_all.yml)
+
 # redact-pii-core
 
 Remove personally identifiable information from text.
