@@ -1,4 +1,4 @@
-import { snakeCase } from 'lodash';
+import { snakeCase } from 'change-case-all';
 import { NameRedactor } from './built-ins/NameRedactor';
 import * as simpleRegexpBuiltIns from './built-ins/simple-regexp-patterns';
 import { SimpleRegexpRedactor } from './built-ins/SimpleRegexpRedactor';

@@ -22,8 +22,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@types/lodash": "^4.17.16",
-    "lodash": "^4.17.21"
+    "change-case-all": "^1.0.15"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
