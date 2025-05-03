@@ -7,7 +7,7 @@ const closingRegex =
 
 const greetingOrClosing = new RegExp(
   '(((' + greetingRegex.source + ')|(' + closingRegex.source + '\\s*[,.!]*))[\\s-]*)',
-  'gi'
+  'gi',
 );
 const genericName = new RegExp('( ?(([A-Z][a-z]+)|([A-Z]\\.)))+([,.]|[,.]?$)', 'gm');
 
@@ -22,9 +22,9 @@ export class NameRedactor implements ISyncRedactor {
     let greetingOrClosingMatch = greetingOrClosing.exec(textToRedact);
     while (greetingOrClosingMatch !== null) {
       genericName.lastIndex = greetingOrClosing.lastIndex;
-      let genericNameMatch = genericName.exec(textToRedact);
+      const genericNameMatch = genericName.exec(textToRedact);
       if (genericNameMatch !== null && genericNameMatch.index === greetingOrClosing.lastIndex) {
-        let suffix = genericNameMatch[5] === null ? '' : genericNameMatch[5];
+        const suffix = genericNameMatch[5] === null ? '' : genericNameMatch[5];
         textToRedact =
           textToRedact.slice(0, genericNameMatch.index) +
           this.replaceWith +

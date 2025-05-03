@@ -5,7 +5,7 @@ const roadRegex = /(street|st|road|rd|avenue|ave|drive|dr|loop|court|ct|circle|c
 export const creditCardNumber = /\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}|\d{4}[ -]?\d{6}[ -]?\d{4}\d?/g;
 export const streetAddress = new RegExp(
   '(\\d+\\s*(\\w+ ){1,2}' + roadRegex.source + '(\\s+' + aptRegex.source + ')?)|(' + poBoxRegex.source + ')',
-  'gi'
+  'gi',
 );
 export const zipcode = /\b\d{5}\b(-\d{4})?\b/g;
 export const phoneNumber =

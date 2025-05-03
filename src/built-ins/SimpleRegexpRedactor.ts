@@ -1,5 +1,4 @@
-import { SimpleRegexpCustomRedactorConfig, ISyncRedactor } from '../types';
-import { snakeCase } from 'change-case-all';
+import { ISyncRedactor } from '../types';
 
 export class SimpleRegexpRedactor implements ISyncRedactor {
   regexpMatcher: RegExp;

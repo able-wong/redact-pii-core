@@ -39,7 +39,7 @@ export function composeChildRedactors<T extends AsyncCustomRedactorConfig>(opts:
         new SimpleRegexpRedactor({
           regexpPattern: (simpleRegexpBuiltIns as any)[regexpName],
           replaceWith: opts.globalReplaceWith || snakeCase(regexpName).toUpperCase(),
-        })
+        }),
       );
     }
   }
