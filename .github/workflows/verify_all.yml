@@ -29,4 +29,4 @@ jobs:
         run: npm ci
 
       - name: Run typecheck, lint, and test
-        run: npm verify_all
+        run: npm run verify_all

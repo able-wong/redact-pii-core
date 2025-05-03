@@ -1,20 +1,25 @@
-# redact-pii
-
-[![NPM Package](https://badge.fury.io/js/redact-pii.svg)](https://www.npmjs.com/package/redact-pii)
-[![Dependencies](https://david-dm.org/solvvy/redact-pii.svg)](https://david-dm.org/solvvy/redact-pii)
-
-> **NOTE**: Users of <redact-pii@2.x.x> please check the [Changelog](CHANGELOG.md) before upgrading .
+# redact-pii-core
 
 Remove personally identifiable information from text.
 
-### Prerequesites
+## Introduction
 
-This library is primarily written for node.js but it should work in the browser as well.
-It is written in TypeScript and compiles to ES2017. The library makes use of `async` functions and hence needs node.js 8.0.0 or higher (or a modern browser). If this is a problem for you please open an issue and we may consider adapting the compiler settings to support older node.js versions.
+This is a fork of the original [redact-pii](https://github.com/solvvy/redact-pii) library with the following improvements:
+
+- Removal of Google DLP dependency (if you need more advanced PII detection, consider using GenAI tools instead)
+- Switched to use change-case-all instead of lodash to reduce bundle size
+- Upgraded dependencies for better maintenance and security
+
+This library uses regex-based patterns to identify and remove personally identifiable information. While it's not perfect compared to NLP or AI-based solutions, it's particularly useful in scenarios where sending PII to external services is not desirable or permitted.
+
+### Prerequisites
+
+This library is primarily written for Node.js but it should work in the browser as well.
+It is written in TypeScript and compiles to ES2016 (as specified in tsconfig.json). The library requires Node.js 18.0.0 or higher (or a modern browser). If this is a problem for you please open an issue and we may consider adapting the compiler settings to support older Node.js versions.
 
 ### Simple example (synchronous API)
 
-```
+```bash
 npm install redact-pii
 ```
 
