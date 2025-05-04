@@ -9,7 +9,12 @@ const greetingOrClosing = new RegExp(
   '(((' + greetingRegex.source + ')|(' + closingRegex.source + '\\s*[,.!]*))[\\s-]*)',
   'gi',
 );
-const genericName = new RegExp('( ?(([A-Z][a-z]+)|([A-Z]\\.)))+([,.]|[,.]?$)', 'gm');
+
+// this will properly match name like "John Doe" or "John D." or "J. Doe" or "J. D." or "J. D.,"
+// or names with accents like "José García", "François Müller", etc
+// Note: This regex does not handle names with hyphens (e.g., "Mary-Jane Smith")
+// or apostrophes (e.g., "O'Connor", "D'Artagnan") correctly and they may not be redacted.
+const genericName = new RegExp('( ?(([\\p{Lu}][\\p{Ll}]+)|([\\p{Lu}]\\.))){1,5}([,.]|[,.]?$)', 'gmu');
 
 const wellKnownNames = new RegExp('\\b(\\s*)(\\s*(' + _wellKnownNames.join('|') + '))+\\b', 'gim');
 
