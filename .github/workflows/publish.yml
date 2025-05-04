@@ -1,0 +1,29 @@
+# filepath: .github/workflows/publish.yml
+name: Publish Package to npm
+
+on:
+  release:
+    types: [created] # Trigger the workflow when a new GitHub release is created
+
+permissions:
+  contents: read # Restrict permissions to read-only for contents
+  packages: write # Allow write access to publish packages
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Use a version compatible with your project (>=18 as per package.json)
+          registry-url: 'https://registry.npmjs.org/'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build package
+        run: npm run build # Ensure the package is built before publishing
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Use the secret token for authentication

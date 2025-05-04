@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Changelog
 
+## [4.0.1][] - 2025-05-03
+
+- Fixed package name in documentation examples
+- Fixed name regex issues and made minor enhancements
+- Added Canadian SIN, postal code, and social media regex patterns
+- Improved GitHub Actions workflows
+- BREAKING: Removed GoogleDLPRedactor to keep package leaner
+- Switched from lodash to change-case-all for snakeCase functionality
+- Updated all dependencies to latest versions
+- Added ESLint configuration
+- Requires Node.js >= 18.0.0
+
 ## [3.4.0][] - 2022-07-29
 
 - npm package updates including @google-cloud/dlp
@@ -54,14 +66,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Google Cloud DLP redaction is now a seperate redaction class that has to be explicitly imported and instantiated (`new GoogleDLPRedactor()`)
   in order to use it.
 - Google Cloud DLP redaction does not have an implicit, hard-coded 5000ms timeout anymore. If you want to set a timeout for DLP calls you have to implement it yourself. In case you're using `bluebird` as promise library consider using `.timeout`.
-
-[unreleased]: https://github.com/solvvy/redact-pii/compare/v3.2.3...HEAD
-[3.2.3]: https://github.com/solvvy/redact-pii/compare/v3.2.2...v3.2.3
-[3.2.2]: https://github.com/solvvy/redact-pii/compare/v3.2.1...v3.2.2
-[3.2.1]: https://github.com/solvvy/redact-pii/compare/v3.2.0...v3.2.1
-[3.2.0]: https://github.com/solvvy/redact-pii/compare/v3.1.0...v3.2.0
-[3.1.0]: https://github.com/solvvy/redact-pii/compare/v3.0.1...v3.1.0
-[3.0.1]: https://github.com/solvvy/redact-pii/compare/v3.0.0...v3.0.1
-[3.0.0]: https://github.com/solvvy/redact-pii/tree/v3.0.0
-[unreleased]: https://github.com/solvvy/redact-pii/compare/v3.3.0-beta.1...HEAD
-[3.3.0-beta.1]: https://github.com/solvvy/redact-pii/tree/v3.3.0-beta.1
