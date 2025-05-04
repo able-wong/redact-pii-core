@@ -17,4 +17,14 @@ export const username = /(user( ?name)?|login): \S+/gi;
 export const password = /(pass(word|phrase)?|secret): \S+/gi;
 export const credentials = /(login( cred(ential)?s| info(rmation)?)?|cred(ential)?s) ?:\s*\S+\s+\/?\s*\S+/gi;
 export const digits = /\b\d{4,}\b/g;
+
+// Canadian specific patterns
+export const canadianSIN = /\b\d{3}[ -]?\d{3}[ -]?\d{3}\b/g; // Canadian Social Insurance Number
+export const canadianPostalCode = /\b[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d\b/g; // Format: A1A 1A1
+
+// Social media profiles
+export const facebookProfile = /(?:https?:\/\/)?(?:www\.)?facebook\.com\/[a-zA-Z0-9.]+\/?/gi;
+export const linkedinProfile = /(?:https?:\/\/)?(?:www\.)?linkedin\.com\/(?:in|company)\/[a-zA-Z0-9_-]+\/?/gi;
+
+// url is moved after social media profiles to allow better redacted message specific to social media
 export const url = /([^\s:/?#]+):\/\/([^/?#\s]*)([^?#\s]*)(\?([^#\s]*))?(#([^\s]*))?/g;

@@ -2,7 +2,6 @@ import { composeChildRedactors } from './composition';
 import { CompositeRedactorOptions, ISyncRedactor, SyncCustomRedactorConfig } from './types';
 
 /** @public */
-
 export interface SyncCompositeRedactorOptions extends CompositeRedactorOptions<SyncCustomRedactorConfig> {}
 
 /** @public */

@@ -199,4 +199,31 @@ describe('index.js', function () {
     ['before http://www.example.com/foo/bar?foo=bar#/foo/bar after', 'before URL after'],
     ['My homepage is http://example.com\nAnd that is that.', 'My homepage is URL\nAnd that is that.'],
   ]);
+
+  TestCase('should replace Canadian social insurance numbers', [
+    ['my SIN is 123-456-789', 'my SIN is CANADIAN_SIN'],
+    ['SIN: 123 456 789', 'SIN: CANADIAN_SIN'],
+    ['The number 123-456-789 is my SIN', 'The number CANADIAN_SIN is my SIN'],
+  ]);
+
+  TestCase('should replace Canadian postal codes', [
+    ['my postal code is A1A 1A1', 'my postal code is CANADIAN_POSTAL_CODE'],
+    ['Postal code: A1A-1A1', 'Postal code: CANADIAN_POSTAL_CODE'],
+    ['Please ship to V6G 2Z9', 'Please ship to CANADIAN_POSTAL_CODE'],
+    ['Address: 123 Main St, Toronto, ON M5V 2K7', 'Address: STREET_ADDRESS, Toronto, ON CANADIAN_POSTAL_CODE'],
+  ]);
+
+  TestCase('should replace Facebook profile URLs', [
+    ['Check out my profile at https://www.facebook.com/johnsmith', 'Check out my profile at FACEBOOK_PROFILE'],
+    ['FB: facebook.com/jane.doe.123', 'FB: FACEBOOK_PROFILE'],
+    ['You can find me on https://facebook.com/john.smith.official/', 'You can find me on FACEBOOK_PROFILE'],
+    ['Visit www.facebook.com/companyname for more info', 'Visit FACEBOOK_PROFILE for more info'],
+  ]);
+
+  TestCase('should replace LinkedIn profile URLs', [
+    ['My LinkedIn: https://www.linkedin.com/in/johnsmith', 'My LinkedIn: LINKEDIN_PROFILE'],
+    ['Connect with me: linkedin.com/in/jane-doe-123', 'Connect with me: LINKEDIN_PROFILE'],
+    ['Company page: https://www.linkedin.com/company/acme-corp/', 'Company page: LINKEDIN_PROFILE'],
+    ['Visit www.linkedin.com/in/johnsmith/ for my resume', 'Visit LINKEDIN_PROFILE for my resume'],
+  ]);
 });
