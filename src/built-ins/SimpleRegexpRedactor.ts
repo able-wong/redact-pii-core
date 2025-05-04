@@ -15,7 +15,7 @@ export class SimpleRegexpRedactor implements ISyncRedactor {
     this.regexpMatcher = regexpMatcher;
   }
 
-  redact(textToRedact: string) {
+  redact(textToRedact: string): string {
     return textToRedact.replace(this.regexpMatcher, this.replaceWith);
   }
 }
