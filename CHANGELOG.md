@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed name regex issues and made minor enhancements
 - Added Canadian SIN, postal code, and social media regex patterns
 - Improved GitHub Actions workflows
-- BREAKING: Removed GoogleDLPRedactor
+- BREAKING: Removed GoogleDLPRedactor to keep package leaner
 - Switched from lodash to change-case-all for snakeCase functionality
 - Updated all dependencies to latest versions
 - Added ESLint configuration
