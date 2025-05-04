@@ -96,6 +96,22 @@ describe('index.js', function () {
     ['blah blah. Thanks -Jon', 'blah blah. Thanks -PERSON_NAME'],
   ]);
 
+  TestCase('should redact names with accent letters', [
+    ['Dear José García, thank you for your inquiry.', 'Dear PERSON_NAME, thank you for your inquiry.'],
+    ['Hi François Müller, please review the document.', 'Hi PERSON_NAME, please review the document.'],
+    [
+      'blah blah\n\n\nAll the best,\n\n-Jürgen Möller\n\nAcme Support',
+      'blah blah\n\n\nAll the best,\n\n-PERSON_NAME\n\nAcme Support',
+    ],
+    ['Thanks for your help.\n\nRegards,\nÁngela Rodríguez', 'Thanks for your help.\n\nRegards,\nPERSON_NAME'],
+    ['Hello Péter Nagy, your order is ready.', 'Hello PERSON_NAME, your order is ready.'],
+  ]);
+
+  TestCase('should not redact correctly names with hyphens or apostrophes', [
+    // Known limitations - these test cases document current behavior but don't test for ideal behavior
+    ["Thank you, D'Artagnan, for your service.", "Thank you, D'Artagnan, for your service."],
+  ]);
+
   TestCase('should replace credit card numbers', [
     ['my card: 1234 5678 8765 4321.', 'my card: CREDIT_CARD_NUMBER.'],
     ['my 2nd card: 1234-5678-8765-4321.', 'my 2nd card: CREDIT_CARD_NUMBER.'],

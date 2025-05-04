@@ -6,7 +6,7 @@ Remove personally identifiable information from text.
 
 ## Introduction
 
-This is a fork of the original [redact-pii](https://github.com/solvvy/redact-pii) library with the following improvements:
+This is a fork of the original [redact-pii](https://github.com/solvvy/redact-pii) library with the following changes:
 
 - Removal of Google DLP dependency (if you need more advanced PII detection, consider using GenAI tools instead)
 - Switched to use change-case-all instead of lodash to reduce bundle size
@@ -17,7 +17,7 @@ This library uses regex-based patterns to identify and remove personally identif
 ### Prerequisites
 
 This library is primarily written for Node.js but it should work in the browser as well.
-It is written in TypeScript and compiles to ES2016 (as specified in tsconfig.json). The library requires Node.js 18.0.0 or higher (or a modern browser). If this is a problem for you please open an issue and we may consider adapting the compiler settings to support older Node.js versions.
+It is written in TypeScript and compiles to ES2016 (as specified in tsconfig.json). The library requires Node.js 18.0.0 or higher (or a modern browser).
 
 ### Simple example (synchronous API)
 
@@ -53,13 +53,18 @@ redactor.redactAsync('Hi David Johnson, Please give me a call at 555-555-5555').
   - creditCardNumber
   - emailAddress
   - ipAddress
-  - names
+  - names (including some support with international names with accents like "José García" or "François Müller")
+    - **Limitation**: The current regex pattern doesn't properly handle names with hyphens (e.g., "Mary-Jane Smith") or apostrophes (e.g., "O'Connor", "D'Artagnan"). Some accent letters are not handled too (e.g., "Søren Jørgensen")
   - password
   - phoneNumber
   - streetAddress
   - username
   - usSocialSecurityNumber
   - zipcode
+  - canadianSIN
+  - canadianPostalCode
+  - facebookProfile
+  - linkedInProfile
   - url
   - digits
   - > **NOTE**: the built-in redaction rules are mostly applicable for identifying (US-)english PII.
