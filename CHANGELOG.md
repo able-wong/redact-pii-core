@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # Changelog
 
+## [4.0.2][] - 2025-05-04
+
+- Fixed wellknownname matching in NameRedactor slowness and refactored the class for maintainability.
+
 ## [4.0.1][] - 2025-05-03
 
 - Fixed package name in documentation examples
