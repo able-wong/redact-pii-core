@@ -16,7 +16,10 @@ const greetingOrClosing = new RegExp(
 // or apostrophes (e.g., "O'Connor", "D'Artagnan") correctly and they may not be redacted.
 const genericName = new RegExp('( ?(([\\p{Lu}][\\p{Ll}]+)|([\\p{Lu}]\\.))){1,5}([,.]|[,.]?$)', 'gmu');
 
-const wellKnownNames = new RegExp('\\b(\\s*)(\\s*(' + _wellKnownNames.join('|') + '))+\\b', 'gim');
+// not using regex because regexp with 11k+ names would be too slow.
+const wellKnownNamesSet = new Set(_wellKnownNames.map((name) => name.toLowerCase()));
+
+const wellKnownNameTmpReplace = '{{{PERSON_NAME}}}';
 
 export class NameRedactor implements ISyncRedactor {
   constructor(private replaceWith = 'PERSON_NAME') {}
@@ -25,6 +28,7 @@ export class NameRedactor implements ISyncRedactor {
     greetingOrClosing.lastIndex = 0;
     genericName.lastIndex = 0;
     let greetingOrClosingMatch = greetingOrClosing.exec(textToRedact);
+
     while (greetingOrClosingMatch !== null) {
       genericName.lastIndex = greetingOrClosing.lastIndex;
       const genericNameMatch = genericName.exec(textToRedact);
@@ -39,7 +43,22 @@ export class NameRedactor implements ISyncRedactor {
       greetingOrClosingMatch = greetingOrClosing.exec(textToRedact);
     }
 
-    textToRedact = textToRedact.replace(wellKnownNames, '$1' + this.replaceWith);
+    // Replace well-known names with a temporary placeholder
+    const words = textToRedact.split(/\b/);
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i].trim().toLowerCase();
+      if (word && wellKnownNamesSet.has(word)) {
+        words[i] = wellKnownNameTmpReplace;
+      }
+    }
+    textToRedact = words.join('');
+
+    // Replace multiple adjacent wellKnownNameTmpReplace with a single replacement
+    const multiNameRegex = new RegExp(`${wellKnownNameTmpReplace}(\\s+${wellKnownNameTmpReplace})+`, 'g');
+    textToRedact = textToRedact.replace(multiNameRegex, this.replaceWith);
+
+    // Replace any remaining temporary placeholders
+    textToRedact = textToRedact.replace(new RegExp(wellKnownNameTmpReplace, 'g'), this.replaceWith);
 
     return textToRedact;
   }
